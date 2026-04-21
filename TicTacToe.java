@@ -15,7 +15,6 @@ public class TicTacToe {
             }
         }
     }
-
     static void printBoard() {
         System.out.println("-------------");
         for (int row = 0; row < 3; row++) {
