@@ -1,29 +1,28 @@
 package com.srm.src;
+import java.util.Scanner;
 public class TicTacToe {
-    // Corrected array declaration
-    static char[][] board = new char[3][3];
-
     public static void main(String[] args) {
-        initializeBoard();
-        printBoard();
+        int slot = getUserSlot();
+        System.out.println("Slot entered: " + slot);
     }
-
-    static void initializeBoard() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = ' '; // Fill with empty spaces
+    static int getUserSlot() {
+        Scanner scan = new Scanner(System.in);
+        int slot;
+        while (true) {
+            System.out.print("Enter a slot number (1-9): ");
+            if (scan.hasNextInt()) {
+                slot = scan.nextInt();
+                if (slot >= 1 && slot <= 9) {
+                    break; 
+                } else {
+                    System.out.println("Invalid input. Please enter a number between 1 and 9.");
+                }
+            } else {
+                System.out.println("Invalid input. Please enter a number between 1 and 9.");
+                scan.next(); 
             }
         }
-    }
-    static void printBoard() {
-        System.out.println("-------------");
-        for (int row = 0; row < 3; row++) {
-            System.out.print("| ");
-            for (int col = 0; col < 3; col++) {
-                System.out.print(board[row][col] + " | ");
-            }
-            System.out.println();
-            System.out.println("-------------");
-        }
+        scan.close();
+        return slot;
     }
 }
