@@ -1,30 +1,40 @@
 package com.srm.src;
+
+import java.util.Scanner;
+
 public class TicTacToe {
-    // Corrected array declaration
-    static char[][] board = new char[3][3];
+    static char[][] board = {
+        {'-', '-', '-'},
+        {'-', '-', '-'},
+        {'-', '-', '-'}
+    };
 
     public static void main(String[] args) {
-        initializeBoard();
-        printBoard();
-    }
+        Scanner scanner = new Scanner(System.in);
 
-    static void initializeBoard() {
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                board[i][j] = ' '; // Fill with empty spaces
-            }
+        // UC5 Flow: Receive Row and Column
+        System.out.println("Enter move (row and column: 0-2): ");
+        int row = scanner.nextInt();
+        int col = scanner.nextInt();
+
+        // UC5 Flow: Validation performed
+        if (isValidMove(row, col)) {
+            // UC5 Flow: Move accepted
+            board[row][col] = 'X'; 
+            System.out.println("Move accepted!");
+        } else {
+            // UC5 Flow: Move rejected
+            System.out.println("Invalid move! Cell is out of bounds or already occupied.");
         }
     }
 
-    static void printBoard() {
-        System.out.println("-------------");
-        for (int row = 0; row < 3; row++) {
-            System.out.print("| ");
-            for (int col = 0; col < 3; col++) {
-                System.out.print(board[row][col] + " | ");
-            }
-            System.out.println();
-            System.out.println("-------------");
+    public static boolean isValidMove(int row, int col) {
+        // Boundary check
+        if (row < 0 || row >= 3 || col < 0 || col >= 3) {
+            return false;
         }
+        // Occupancy check
+        return board[row][col] == '-';
     }
 }
+
